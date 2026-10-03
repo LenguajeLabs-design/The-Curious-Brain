@@ -1,10 +1,11 @@
 # The Curious Brain
 
-A gentle ADHD guide for kids and caregivers, with calm FAQs, practical strategies, age-appropriate medication information, and trusted resources. Made to support family conversations, not replace medical care.
+A gentle ADHD guide for kids and caregivers, with calm FAQs, practical strategies, age-appropriate medication information, and trusted resources. The complete guide is available in English and Korean. Made to support family conversations, not replace medical care.
 
 ## What’s here
 
 - A child-friendly introduction to ADHD and common questions
+- An English/Korean language switch for the child and grown-up sections
 - Everyday strategies a child can choose and try with a trusted adult
 - General information about methylphenidate extended-release medicines, with reminders to check the exact prescription with a pharmacist or prescriber
 - Public stories and further reading, grouped in a grown-up section
