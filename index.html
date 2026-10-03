@@ -70,11 +70,11 @@
     .button:hover { background: var(--plum-dark); }
     .orbit { display: grid; place-items: center; min-height: 245px; }
     .brain-card {
-      display: grid; place-items: center; width: 205px; height: 205px; border: 1px solid rgb(255 255 255 / 75%);
-      border-radius: 42% 58% 52% 48% / 47% 40% 60% 53%; background: #fffaf2; box-shadow: var(--shadow);
+      display: grid; place-items: center; width: 205px; height: 205px; overflow: hidden; border: 1px solid rgb(255 255 255 / 75%);
+      border-radius: 50%; background: #fffaf2; box-shadow: var(--shadow);
       transform: rotate(-5deg);
     }
-    .brain-card span { display: block; transform: rotate(5deg); font-size: 86px; }
+    .brain-card img { display: block; width: 100%; height: 100%; object-fit: cover; transform: rotate(5deg) scale(1.02); }
     .spark { position: absolute; color: #9a77b2; font-size: 25px; }
     .spark.one { top: 12%; left: 12%; }.spark.two { right: 2%; top: 24%; font-size: 18px; }.spark.three { left: 16%; bottom: 12%; color: #cb9b38; }
     nav { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 52px; }
@@ -132,6 +132,11 @@
     .story .sport { color: var(--plum-dark); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
     .story h3 { margin: 8px 0; font-size: 24px; }
     .story-source { margin: auto 0 0; color: var(--plum-dark); font-size: 14px; font-weight: 700; }
+    .story-photo { margin: -26px -26px 18px; overflow: hidden; border-radius: 21px 21px 0 0; background: #d8f2fb; }
+    .story-photo img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 42%; }
+    .story-photo img.illustration { object-fit: contain; background: #edf4df; }
+    .story-photo figcaption { padding: 7px 12px; background: #f5faff; font-size: 12px; line-height: 1.35; text-align: right; }
+    .story-photo figcaption a { color: var(--muted); }
     .permission-note { margin-top: 15px; color: var(--muted); font-size: 14px; }
     .talk { display: grid; grid-template-columns: .7fr 1.3fr; gap: 25px; align-items: center; margin-bottom: 50px; padding: clamp(24px, 5vw, 42px); border-radius: 24px; background: var(--plum); color: white; }
     .talk h2 { margin-bottom: 6px; font-size: clamp(27px, 4vw, 38px); line-height: 1.1; }
@@ -167,6 +172,7 @@
       .wrap { width: min(100% - 24px, 1080px); }
       .strategy-grid { grid-template-columns: 1fr; }
       .card { padding: 21px; }
+      .story-photo { margin: -21px -21px 16px; }
       nav a { font-size: 13px; padding: 7px 11px; }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -212,7 +218,7 @@
       </div>
       <div class="orbit" aria-hidden="true">
         <span class="spark one">✦</span><span class="spark two">✧</span><span class="spark three">✦</span>
-        <div class="brain-card"><span>🧠</span></div>
+        <div class="brain-card"><img src="assets/brain-mascot.jpg" alt="" width="720" height="720" fetchpriority="high" decoding="async"></div>
       </div>
     </section>
 
@@ -323,12 +329,20 @@
       </div>
       <div class="story-grid">
         <article class="card story">
+          <figure class="story-photo">
+            <img src="assets/simone-biles-paris-2024.jpg" alt="Simone Biles seated beside a balance beam at the 2024 Paris Olympics." data-i18n-alt="simonePhotoAlt" width="1200" height="936" loading="lazy" decoding="async">
+            <figcaption><a href="https://commons.wikimedia.org/wiki/File:Simone_Biles_Paris_Olympics.jpg" target="_blank" rel="noopener noreferrer" data-i18n="simonePhotoCredit">Photo: Ocoudis / Wikimedia Commons (CC0 1.0)</a></figcaption>
+          </figure>
           <span class="sport" data-i18n="simoneSport">Gymnastics · Olympic champion</span>
           <h3 lang="en">Simone Biles</h3>
           <p data-i18n="simoneStory">Simone has spoken about having ADHD and how focus could be tricky during gymnastics competitions. She kept training, found ways to manage it, and won many Olympic and world championship medals.</p>
           <p class="story-source" data-i18n="simoneSource">A grown-up can find an interview in the sources below.</p>
         </article>
         <article class="card story">
+          <figure class="story-photo">
+            <img class="illustration" src="assets/kate-nye-illustration.jpg" alt="An original illustration of a fictional woman weightlifter holding a barbell." data-i18n-alt="katePhotoAlt" width="800" height="800" loading="lazy" decoding="async">
+            <figcaption data-i18n="katePhotoCredit">Illustration made for this guide; not a portrait of Kate Nye.</figcaption>
+          </figure>
           <span class="sport" data-i18n="kateSport">Weightlifting · Olympic medalist</span>
           <h3 lang="en">Kate Nye</h3>
           <p data-i18n="kateStory">Kate has talked about having ADHD. She won an Olympic silver medal in weightlifting. Her life is much bigger than either of those facts.</p>
@@ -455,6 +469,10 @@
         storiesTitle: 'ADHD는 다양한 사람들의 이야기 속에 있어요',
         storiesIntro: '이 사람들은 ADHD에 대해 공개적으로 이야기했어요. 그들의 이야기는 그들의 것이고, 너만의 이야기도 만들어 갈 수 있어요.',
         simoneSport: '체조 · 올림픽 챔피언',
+        simonePhotoAlt: '2024 파리 올림픽에서 평균대 옆에 앉아 있는 시몬 바일스.',
+        simonePhotoCredit: '사진: Ocoudis / 위키미디어 공용 (CC0 1.0)',
+        katePhotoAlt: '바벨을 든 가상의 여성 역도 선수 그림이에요.',
+        katePhotoCredit: '이 안내서를 위해 그린 그림이며, 케이트 나이의 초상화가 아니에요.',
         simoneStory: '시몬 바일스는 ADHD가 있다고 이야기했고, 체조 경기에서 집중하기가 어려울 수 있다고 말했어요. 계속 훈련하며 자신에게 맞는 방법을 찾았고, 올림픽과 세계선수권에서 여러 메달을 땄어요.',
         simoneSource: '아래 참고 자료에서 어른과 함께 인터뷰를 찾아볼 수 있어요.',
         kateSport: '역도 · 올림픽 메달리스트',
@@ -499,6 +517,10 @@
         Array.from(document.querySelectorAll('[data-i18n-aria]'))
           .map(element => [element, element.getAttribute('aria-label')])
       );
+      const originalAlt = new Map(
+        Array.from(document.querySelectorAll('[data-i18n-alt]'))
+          .map(element => [element, element.getAttribute('alt')])
+      );
       const originalTitle = document.title;
       const buttons = document.querySelectorAll('[data-language]');
       const status = document.getElementById('language-status');
@@ -519,6 +541,10 @@
         }
         for (const [element, english] of originalAria) {
           element.setAttribute('aria-label', isKorean ? ariaKorean[element.dataset.i18nAria] : english);
+        }
+        for (const [element, english] of originalAlt) {
+          const translatedAlt = isKorean ? korean[element.dataset.i18nAlt] : english;
+          if (translatedAlt) element.setAttribute('alt', translatedAlt);
         }
         document.title = isKorean ? 'The Curious Brain | 어린이 ADHD 안내' : originalTitle;
         for (const button of buttons) {

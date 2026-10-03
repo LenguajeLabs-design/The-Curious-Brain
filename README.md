@@ -10,6 +10,11 @@ A gentle ADHD guide for kids and caregivers, with calm FAQs, practical strategie
 - General information about methylphenidate extended-release medicines, with reminders to check the exact prescription with a pharmacist or prescriber
 - Public stories and further reading, grouped in a grown-up section
 
+## Images and licensing
+
+- `assets/brain-mascot.jpg` and `assets/kate-nye-illustration.jpg` are original illustrations generated for this guide. The weightlifting art is labeled as an illustration, not a portrait of Kate Nye.
+- `assets/simone-biles-paris-2024.jpg` is a photo by Ocoudis, shared under the [CC0 1.0 Public Domain Dedication](https://creativecommons.org/publicdomain/zero/1.0/). The [Wikimedia Commons file page](https://commons.wikimedia.org/wiki/File:Simone_Biles_Paris_Olympics.jpg) is linked in the photo caption; credit is included as a courtesy. The image is stored with the site so visitors do not make an automatic image request to Wikimedia.
+
 ## Privacy and care
 
 This is a static page. It has no account, chat, form, or tracking code, and it does not collect information from visitors. External links follow the privacy practices of the sites they open. The guide is for learning and conversation; it is not medical advice or a substitute for a child's healthcare team.
