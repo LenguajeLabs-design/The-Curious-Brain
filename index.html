@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f4ee">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Curious Brain</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f7f4ee;
+      --card: #fffdf9;
+      --ink: #292644;
+      --muted: #625f73;
+      --plum: #574781;
+      --plum-dark: #433665;
+      --lilac: #e9e2f3;
+      --mint: #e1eee6;
+      --peach: #f7e6d9;
+      --line: #ded9e4;
+      --gold: #f4cb72;
+      --shadow: 0 16px 40px rgb(55 44 80 / 8%);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font: 17px/1.65 ui-rounded, "Avenir Next", Avenir, "Segoe UI", sans-serif;
+    }
+    a { color: var(--plum-dark); text-underline-offset: 3px; }
+    a:hover { text-decoration-thickness: 2px; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid #a884cf; outline-offset: 4px; border-radius: 4px; }
+    .wrap { width: min(100% - 36px, 1080px); margin-inline: auto; }
+    .topbar { padding: 17px 0; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 750; letter-spacing: .01em; }
+    .brand-mark { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 12px; background: var(--plum); color: white; font-size: 18px; }
+    .top-note { float: right; color: var(--muted); font-size: 14px; padding-top: 6px; }
+    .hero {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(220px, .65fr);
+      align-items: center;
+      gap: 24px;
+      min-height: 390px;
+      padding: clamp(30px, 6vw, 72px);
+      border-radius: 32px;
+      background: var(--lilac);
+    }
+    .hero::before, .hero::after { content: ""; position: absolute; border-radius: 50%; pointer-events: none; }
+    .hero::before { width: 250px; height: 250px; right: 4%; top: -95px; background: rgb(255 255 255 / 27%); }
+    .hero::after { width: 150px; height: 150px; right: 14%; bottom: -88px; background: rgb(244 203 114 / 48%); }
+    .hero-copy, .orbit { position: relative; z-index: 1; }
+    .eyebrow { margin: 0 0 12px; color: var(--plum-dark); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { max-width: 660px; margin-bottom: 18px; font-size: clamp(38px, 6vw, 66px); line-height: 1.04; letter-spacing: -.045em; }
+    .hero p.lead { max-width: 590px; margin-bottom: 24px; color: #4e4967; font-size: clamp(18px, 2.5vw, 21px); }
+    .button {
+      display: inline-flex; align-items: center; gap: 9px; padding: 12px 18px;
+      border-radius: 999px; background: var(--plum); color: #fff; font-weight: 750; text-decoration: none;
+    }
+    .button:hover { background: var(--plum-dark); }
+    .orbit { display: grid; place-items: center; min-height: 245px; }
+    .brain-card {
+      display: grid; place-items: center; width: 205px; height: 205px; border: 1px solid rgb(255 255 255 / 75%);
+      border-radius: 42% 58% 52% 48% / 47% 40% 60% 53%; background: #fffaf2; box-shadow: var(--shadow);
+      transform: rotate(-5deg);
+    }
+    .brain-card span { display: block; transform: rotate(5deg); font-size: 86px; }
+    .spark { position: absolute; color: #9a77b2; font-size: 25px; }
+    .spark.one { top: 12%; left: 12%; }.spark.two { right: 2%; top: 24%; font-size: 18px; }.spark.three { left: 16%; bottom: 12%; color: #cb9b38; }
+    nav { display: flex; gap: 10px; flex-wrap: wrap; margin: 22px 0 52px; }
+    nav a { padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 650; background: rgb(255 253 249 / 70%); }
+    nav a:hover { background: #fff; border-color: #b9adcb; }
+    section { scroll-margin-top: 20px; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-bottom: 22px; }
+    .section-head h2 { margin-bottom: 5px; font-size: clamp(29px, 4vw, 42px); line-height: 1.12; letter-spacing: -.03em; }
+    .section-head p { max-width: 520px; margin-bottom: 0; color: var(--muted); }
+    .intro-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 18px; margin-bottom: 72px; }
+    .card { padding: 26px; border: 1px solid rgb(222 217 228 / 85%); border-radius: 22px; background: var(--card); box-shadow: 0 8px 25px rgb(55 44 80 / 4%); }
+    .card h3 { margin-bottom: 9px; font-size: 20px; letter-spacing: -.02em; }
+    .card p:last-child { margin-bottom: 0; }
+    .big-note { background: var(--mint); border-color: transparent; }
+    .big-note .note-mark { display: grid; place-items: center; width: 38px; height: 38px; margin-bottom: 14px; border-radius: 12px; background: white; color: #416b54; font-weight: 900; }
+    .big-note p { font-size: 19px; }
+    .tiny-label { color: var(--muted); font-size: 13px; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 16px; }
+    .fact { padding: 15px; border-radius: 15px; background: #f5f1fa; }
+    .fact strong { display: block; margin-bottom: 3px; color: var(--plum-dark); }
+    .faq-section { margin-bottom: 72px; }
+    .faq-layout { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(250px, .75fr); align-items: start; gap: 20px; }
+    .faq-list { display: grid; gap: 10px; }
+    details { border: 1px solid var(--line); border-radius: 16px; background: var(--card); }
+    summary { position: relative; padding: 17px 48px 17px 19px; list-style: none; cursor: pointer; font-weight: 750; line-height: 1.4; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: "+"; position: absolute; top: 50%; right: 19px; display: grid; place-items: center; width: 25px; height: 25px; border-radius: 50%; background: var(--lilac); color: var(--plum-dark); transform: translateY(-50%); font-size: 19px; }
+    details[open] summary::after { content: "−"; }
+    .answer { padding: 0 19px 18px; color: #514e63; }
+    .answer p:last-child { margin-bottom: 0; }
+    .side-note { background: var(--peach); border-color: transparent; }
+    .side-note h3 { font-size: 23px; }
+    .side-note .quote { margin: 18px 0; padding-left: 14px; border-left: 3px solid #c58762; color: #4b3b3a; font-size: 18px; font-weight: 700; }
+    .strategies { margin-bottom: 72px; }
+    .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .more-tools { margin-top: 12px; }
+    .more-tools .strategy-grid { padding: 0 14px 14px; }
+    .strategy { min-height: 187px; }
+    .strategy .num { display: grid; place-items: center; width: 34px; height: 34px; margin-bottom: 13px; border-radius: 11px; background: var(--lilac); color: var(--plum-dark); font-weight: 850; }
+    .strategy:nth-child(3n + 2) .num { background: var(--mint); color: #416b54; }
+    .strategy:nth-child(3n) .num { background: var(--peach); color: #875536; }
+    .try-note { margin-top: 14px; padding: 13px 17px; border-radius: 14px; background: #fff4cf; color: #55472b; }
+    .medicine { margin-bottom: 72px; }
+    .medicine-panel { display: grid; grid-template-columns: 1fr .72fr; gap: 18px; align-items: stretch; }
+    .medicine-main { background: #eeebf8; border-color: transparent; }
+    .medicine-main .pill { display: inline-block; margin-bottom: 10px; padding: 4px 10px; border-radius: 999px; background: #fff; color: var(--plum-dark); font-size: 13px; font-weight: 800; }
+    .medicine-main h3 { font-size: 25px; }
+    .medicine-main ul { padding-left: 21px; margin-bottom: 0; }
+    .medicine-main li { padding-left: 3px; margin: 6px 0; }
+    .ask-card { background: var(--mint); border-color: transparent; }
+    .ask-card .prompt { padding: 12px 14px; border-radius: 12px; background: white; margin: 10px 0; font-weight: 650; }
+    .stories { margin-bottom: 72px; }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .story { display: flex; flex-direction: column; min-height: 220px; }
+    .story .sport { color: var(--plum-dark); font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .story h3 { margin: 8px 0; font-size: 24px; }
+    .story-source { margin: auto 0 0; color: var(--plum-dark); font-size: 14px; font-weight: 700; }
+    .permission-note { margin-top: 15px; color: var(--muted); font-size: 14px; }
+    .talk { display: grid; grid-template-columns: .7fr 1.3fr; gap: 25px; align-items: center; margin-bottom: 50px; padding: clamp(24px, 5vw, 42px); border-radius: 24px; background: var(--plum); color: white; }
+    .talk h2 { margin-bottom: 6px; font-size: clamp(27px, 4vw, 38px); line-height: 1.1; }
+    .talk p { margin-bottom: 0; color: #eee9f7; }
+    .question-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .question-chips span { padding: 8px 12px; border: 1px solid rgb(255 255 255 / 28%); border-radius: 999px; color: white; font-size: 14px; }
+    .grownups { margin-bottom: 44px; }
+    .grownups details { background: #f1eee8; }
+    .source-list { display: grid; gap: 8px; margin: 12px 0 0; padding-left: 20px; }
+    .source-list li { padding-left: 2px; }
+    footer { padding: 24px 0 38px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+    footer p { margin-bottom: 7px; }
+    .privacy { font-weight: 700; color: #4f4a61; }
+    @media (max-width: 760px) {
+      body { font-size: 16px; }
+      .top-note { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; padding: 32px 25px 18px; border-radius: 24px; }
+      .orbit { min-height: 175px; }
+      .brain-card { width: 145px; height: 145px; }
+      .brain-card span { font-size: 62px; }
+      nav { margin: 18px 0 42px; }
+      .intro-grid, .faq-layout, .medicine-panel, .talk { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-head p { margin-top: 8px; }
+      .facts { grid-template-columns: 1fr; }
+      .strategy-grid { grid-template-columns: 1fr 1fr; }
+      .story-grid { grid-template-columns: 1fr; }
+      .talk { gap: 15px; }
+    }
+    @media (max-width: 440px) {
+      .wrap { width: min(100% - 24px, 1080px); }
+      .strategy-grid { grid-template-columns: 1fr; }
+      .card { padding: 21px; }
+      nav a { font-size: 13px; padding: 7px 11px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+    @media print {
+      body { background: white; font-size: 12pt; }
+      .wrap { width: 100%; }
+      .topbar, nav, .button, .spark { display: none; }
+      .hero, .talk { min-height: auto; padding: 20px; background: white; color: var(--ink); border: 1px solid #bbb; }
+      .hero p.lead, .talk p { color: var(--ink); }
+      .orbit { display: none; }
+      .card, details { break-inside: avoid; box-shadow: none; }
+      details > .answer { display: block; }
+      .talk { display: block; }
+      .question-chips span { color: var(--ink); border-color: #aaa; }
+      a { color: var(--ink); }
+      section { margin-bottom: 28px !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar wrap">
+    <a class="brand" href="#top" aria-label="The Curious Brain home"><span class="brand-mark" aria-hidden="true">✦</span> The Curious Brain</a>
+    <span class="top-note">A calm place to get curious, together</span>
+  </header>
+
+  <main class="wrap" id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">A little guide for a big question</p>
+        <h1 id="hero-title">Your brain is yours. Let’s learn how it works.</h1>
+        <p class="lead">A new ADHD diagnosis can bring lots of questions. You can read a little, skip anything, and come back with a grown-up you trust.</p>
+        <a class="button" href="#questions">Start exploring <span aria-hidden="true">↓</span></a>
+      </div>
+      <div class="orbit" aria-hidden="true">
+        <span class="spark one">✦</span><span class="spark two">✧</span><span class="spark three">✦</span>
+        <div class="brain-card"><span>🧠</span></div>
+      </div>
+    </section>
+
+    <nav aria-label="On this page">
+      <a href="#about">ADHD, simply</a>
+      <a href="#questions">Your questions</a>
+      <a href="#tools">Try a few tools</a>
+      <a href="#medicine">Medicine</a>
+      <a href="#stories">People with ADHD</a>
+    </nav>
+
+    <section class="intro-grid" id="about" aria-labelledby="about-title">
+      <article class="card big-note">
+        <div class="note-mark" aria-hidden="true">✓</div>
+        <p class="tiny-label">First, the most important part</p>
+        <h2 id="about-title">You are still you.</h2>
+        <p>ADHD is a name for a brain that may need extra help with things like steering attention, remembering steps, waiting, or sitting still. It does not mean you are lazy, bad, or broken. You did not cause it.</p>
+      </article>
+      <article class="card">
+        <p class="tiny-label">ADHD can look different</p>
+        <h3>There isn’t one “ADHD kind of kid.”</h3>
+        <p>Some people find focus tricky. Some feel extra wiggly or act before they mean to. Some experience a mix. Your brain has its own pattern, and the grown-ups helping you can learn what works for you.</p>
+        <div class="facts" aria-label="Three reminders">
+          <div class="fact"><strong>Not your fault</strong>You didn’t choose this.</div>
+          <div class="fact"><strong>Still your brain</strong>Your ideas and interests are yours.</div>
+          <div class="fact"><strong>Help is allowed</strong>Tools can make hard things easier.</div>
+        </div>
+      </article>
+    </section>
+
+    <section class="faq-section" id="questions" aria-labelledby="questions-title">
+      <div class="section-head">
+        <div><p class="eyebrow">Wondering about something?</p><h2 id="questions-title">Questions kids ask</h2></div>
+        <p>Open any question that feels useful. It’s okay if you have more questions later.</p>
+      </div>
+      <div class="faq-layout">
+        <div class="faq-list">
+          <details><summary>Did I do something to get ADHD?</summary><div class="answer"><p>No. ADHD is not caused by being naughty, not trying, or making mistakes. You deserve help and kindness, just like any kid.</p></div></details>
+          <details><summary>Does ADHD mean I’m not smart?</summary><div class="answer"><p>No. ADHD doesn’t tell anyone how smart, funny, caring, creative, or good at learning you are. It can make some tasks take more effort, and the right support can help.</p></div></details>
+          <details><summary>Why did I find out now?</summary><div class="answer"><p>Sometimes school, friendships, or growing-up jobs ask for more planning and focus. That can make a brain’s support needs easier to notice. Now your team has a name for what’s going on and can make a plan with you.</p></div></details>
+          <details><summary>Will I still be me if I take medicine?</summary><div class="answer"><p>Yes. Medicine is one possible tool to make some moments easier. You are still you—with your own jokes, favorite things, opinions, and big ideas. Tell your grown-up how it feels for you.</p></div></details>
+          <details><summary>Do I have to tell my friends?</summary><div class="answer"><p>You can choose what you share and with whom. You could simply say, “I do better when I get one direction at a time,” without explaining anything else. A trusted grown-up can help you decide.</p></div></details>
+          <details><summary>What if I feel worried, mad, or sad about this?</summary><div class="answer"><p>Those feelings are allowed. You don’t have to figure them out alone. Tell a grown-up you trust: “I have a question about ADHD and I want you to listen.”</p></div></details>
+        </div>
+        <aside class="card side-note">
+          <p class="tiny-label">Keep this close</p>
+          <h3>The word “disorder” can sound big.</h3>
+          <p>In a doctor’s name, it describes a pattern that can make some parts of life harder. It is not a description of your whole self.</p>
+          <p class="quote">“I can learn what helps my brain.”</p>
+          <p>You don’t have to feel brave every minute. Asking questions is a brave enough start.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="strategies" id="tools" aria-labelledby="tools-title">
+      <div class="section-head">
+        <div><p class="eyebrow">Small experiments</p><h2 id="tools-title">A few tools to try</h2></div>
+        <p>Pick one idea with a grown-up. Keep it if it helps; change it if it doesn’t.</p>
+      </div>
+      <div class="strategy-grid">
+        <article class="card strategy"><span class="num">1</span><h3>Make the first step tiny</h3><p>Instead of “do all the homework,” try “open the notebook and do the first question.” Starting is a real step.</p></article>
+        <article class="card strategy"><span class="num">2</span><h3>Put the reminder where you’ll see it</h3><p>Try a short checklist, a picture, or a note by your backpack. Let the reminder do some of the remembering.</p></article>
+        <article class="card strategy"><span class="num">3</span><h3>Move, then return</h3><p>A stretch, a quick walk, or carrying something to another room can be a planned movement break.</p></article>
+      </div>
+      <details class="more-tools">
+        <summary>Want a few more ideas? Show 3 more.</summary>
+        <div class="strategy-grid">
+          <article class="card strategy"><span class="num">4</span><h3>Ask for one direction</h3><p>Try: “Can you tell me the first thing to do?” You can ask for the next step when you’re ready.</p></article>
+          <article class="card strategy"><span class="num">5</span><h3>Work near a helper</h3><p>Sometimes doing your own task beside a calm grown-up makes it easier to begin and keep going.</p></article>
+          <article class="card strategy"><span class="num">6</span><h3>Make a “launch pad”</h3><p>Choose one spot for tomorrow’s backpack, shoes, and important things. A home for your stuff means less searching.</p></article>
+        </div>
+      </details>
+      <p class="try-note"><strong>Remember:</strong> Tools are experiments, not tests. If one doesn’t fit you, that’s useful information.</p>
+    </section>
+
+    <section class="medicine" id="medicine" aria-labelledby="medicine-title">
+      <div class="section-head">
+        <div><p class="eyebrow">A medicine question</p><h2 id="medicine-title">What is my medicine for?</h2></div>
+        <p>Your prescriber and pharmacist are your medicine experts. You can ask them anything.</p>
+      </div>
+      <div class="medicine-panel">
+        <article class="card medicine-main">
+          <span class="pill">A grown-up can check the exact name on your bottle</span>
+          <h3>It may help some brain jobs feel easier.</h3>
+          <p>If your prescription is a generic for Concerta, the bottle may say <strong>methylphenidate extended-release</strong>. Long-acting versions release medicine over time. Ask a grown-up to check the exact name and directions on your bottle with the pharmacist.</p>
+          <ul>
+            <li>It might help with paying attention, pausing, or getting started.</li>
+            <li>People can feel different from one another, so tell your grown-up what you notice.</li>
+            <li>Some kids notice a tummy ache, a headache, less hunger, or trouble sleeping. Tell your grown-up so they can talk with your prescriber.</li>
+            <li>Take it only the way your grown-up and the label say. Don’t change it or share it.</li>
+          </ul>
+        </article>
+        <aside class="card ask-card">
+          <p class="tiny-label">Questions you can ask</p>
+          <h3>You’re part of the team.</h3>
+          <p class="prompt">“What should I notice if it’s helping?”</p>
+          <p class="prompt">“What should I tell you if something feels weird?”</p>
+          <p class="prompt">“Can we check the bottle together?”</p>
+          <p>If something feels really wrong or you have trouble breathing, tell an adult right away.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="stories" id="stories" aria-labelledby="stories-title">
+      <div class="section-head">
+        <div><p class="eyebrow">A few people you might know</p><h2 id="stories-title">ADHD belongs in all kinds of stories</h2></div>
+        <p>These people have talked publicly about ADHD. Their stories are theirs; your story gets to be yours.</p>
+      </div>
+      <div class="story-grid">
+        <article class="card story">
+          <span class="sport">Gymnastics · Olympic champion</span>
+          <h3>Simone Biles</h3>
+          <p>Simone has spoken about having ADHD and how focus could be tricky during gymnastics competitions. She kept training, found ways to manage it, and won many Olympic and world championship medals.</p>
+          <p class="story-source">A grown-up can find an interview in the sources below.</p>
+        </article>
+        <article class="card story">
+          <span class="sport">Weightlifting · Olympic medalist</span>
+          <h3>Kate Nye</h3>
+          <p>Kate has talked about having ADHD. She won an Olympic silver medal in weightlifting. Her life is much bigger than either of those facts.</p>
+          <p class="story-source">A grown-up can find a profile in the sources below.</p>
+        </article>
+      </div>
+      <p class="permission-note">Being famous or winning medals is not the goal for everyone. People with ADHD make, learn, help, play, and grow in millions of different ways.</p>
+    </section>
+
+    <section class="talk" aria-labelledby="talk-title">
+      <div><p class="eyebrow" style="color:#e6d8fa">Your questions belong here</p><h2 id="talk-title">Bring one question to your grown-up.</h2><p>You can point to one, read it aloud, or make up your own.</p></div>
+      <div class="question-chips" aria-label="Conversation starters">
+        <span>What does ADHD mean for me?</span>
+        <span>What helps at school?</span>
+        <span>How will we know if medicine helps?</span>
+        <span>Can we try one tool together?</span>
+      </div>
+    </section>
+
+    <section class="grownups" aria-label="Notes for adults">
+      <details>
+        <summary>For grown-ups: sources and a medicine note</summary>
+        <div class="answer">
+          <p>This is a conversation starter, not a diagnosis or treatment plan. Please review it with your child and adapt it to her exact medication and care plan. The medicine section is intentionally general.</p>
+          <p><strong>About the generic:</strong> “Methylphenidate extended-release” covers different products, and some products may not be substituted for one another automatically. Check the exact product and directions on her pharmacy label with the pharmacist or prescriber. Don’t infer equivalence from the active ingredient alone.</p>
+          <p><strong>Before opening:</strong> These links leave this guide. Some include personal medical details or other adult topics, so a grown-up should preview them before sharing.</p>
+          <p>Helpful references:</p>
+          <ul class="source-list">
+            <li><a href="https://www.nimh.nih.gov/health/publications/attention-deficit-hyperactivity-disorder-what-you-need-to-know" target="_blank" rel="noopener noreferrer">National Institute of Mental Health: ADHD overview, treatment, and supports</a></li>
+            <li><a href="https://medlineplus.gov/druginfo/meds/a682188.html" target="_blank" rel="noopener noreferrer">MedlinePlus: methylphenidate use, side effects, and product instructions</a></li>
+            <li><a href="https://www.fda.gov/drugs/drug-safety-and-availability/questions-and-answers-regarding-methylphenidate-hydrochloride-extended-release-tablets-generic" target="_blank" rel="noopener noreferrer">FDA: questions about generic Concerta products</a></li>
+            <li><a href="https://www.laureus.com/news/laureus-nominee-simone-biles-speaks-to-laureus-com" target="_blank" rel="noopener noreferrer">Laureus: Simone Biles interview</a></li>
+            <li><a href="https://www.espn.com/espnw/article/31509552/olympic-weightlifter-katherine-nye-how-bipolar-ii-diagnosis-changed-life" target="_blank" rel="noopener noreferrer">ESPN: Kate Nye profile (also discusses another diagnosis)</a></li>
+            <li><a href="https://www.teamusa.com/news/2021/august/01/kate-nye-wins-silver-for-best-us-olympic-weightlifting-result-since-2000" target="_blank" rel="noopener noreferrer">Team USA: Kate Nye’s Olympic silver medal</a></li>
+          </ul>
+          <p>We kept this page free of chat, sign-in, forms, and tracking. External links follow the privacy practices of the sites they open.</p>
+        </div>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p class="privacy">A private little guide: no account, chat box, or personal details needed.</p>
+      <p>This page is for learning and conversation. Her grown-ups and healthcare team can answer questions about her own care.</p>
+    </div>
+  </footer>
+</body>
+</html>
